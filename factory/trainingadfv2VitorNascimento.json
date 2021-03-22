@@ -1,0 +1,9 @@
+{
+	"name": "trainingadfv2VitorNascimento",
+	"location": "brazilsouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2b13cb20-c9c3-48c7-8a79-249380132eaf",
+		"tenantId": "94e2b9e8-3ebf-42cb-a03c-55b76b55974b"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "AzureSulBrail",
+	"properties": {
+		"type": "Managed",
+		"description": "This IR is for Sul do Brasil",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "Brazil South",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0
+				}
+			}
+		}
+	}
+}

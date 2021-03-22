@@ -1,0 +1,6 @@
+{
+	"name": "TrainingIR",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
