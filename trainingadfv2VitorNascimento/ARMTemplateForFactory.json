@@ -51,7 +51,9 @@
 								}
 							},
 							"sink": {
-								"type": "AzureSqlSink"
+								"type": "AzureSqlSink",
+								"preCopyScript": "delete from [dbo].[Addresses]",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"translator": {
