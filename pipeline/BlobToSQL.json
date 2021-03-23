@@ -1,0 +1,109 @@
+{
+	"name": "BlobToSQL",
+	"properties": {
+		"activities": [
+			{
+				"name": "AddressesCsvToSQL",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "Name"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 2
+								},
+								"sink": {
+									"name": "LastName"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 3
+								},
+								"sink": {
+									"name": "Address"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 4
+								},
+								"sink": {
+									"name": "City"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 5
+								},
+								"sink": {
+									"name": "State"
+								}
+							},
+							{
+								"source": {
+									"ordinal": 6
+								},
+								"sink": {
+									"name": "Number",
+									"precision": 10
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AddressesCSV",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "CourseDB22",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
