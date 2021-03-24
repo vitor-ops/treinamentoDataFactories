@@ -11,17 +11,14 @@
 		"OutputSQL_connectionString": {
 			"value": ""
 		},
-		"Schedule_properties_Copy Data To SQL_parameters_fileName": {
-			"value": "cars.csv"
+		"new-blob_properties_Copy Data To SQL_parameters_fileName": {
+			"value": "@triggerBody().fileName"
 		},
-		"Schedule_properties_Copy Data To SQL_parameters_tableName": {
-			"value": "cars"
+		"new-blob_properties_Copy Data To SQL_parameters_tableName": {
+			"value": "@triggerBody().tableName"
 		},
-		"tumbling_properties_pipeline_parameters_fileName": {
-			"value": "cars.csv"
-		},
-		"tumbling_properties_pipeline_parameters_tableName": {
-			"value": "cars"
+		"new-blob_properties_typeProperties_scope": {
+			"value": "/subscriptions/f999f944-5fcc-426a-a89b-7b5c99dabb5c/resourceGroups/ProjetoEstagio/providers/Microsoft.Storage/storageAccounts/projetoestagio"
 		}
 	}
 }

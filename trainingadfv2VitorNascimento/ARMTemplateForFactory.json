@@ -15,21 +15,17 @@
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'OutputSQL'"
 		},
-		"Schedule_properties_Copy Data To SQL_parameters_fileName": {
+		"new-blob_properties_Copy Data To SQL_parameters_fileName": {
 			"type": "string",
-			"defaultValue": "cars.csv"
+			"defaultValue": "@triggerBody().fileName"
 		},
-		"Schedule_properties_Copy Data To SQL_parameters_tableName": {
+		"new-blob_properties_Copy Data To SQL_parameters_tableName": {
 			"type": "string",
-			"defaultValue": "cars"
+			"defaultValue": "@triggerBody().tableName"
 		},
-		"tumbling_properties_pipeline_parameters_fileName": {
+		"new-blob_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "cars.csv"
-		},
-		"tumbling_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "cars"
+			"defaultValue": "/subscriptions/f999f944-5fcc-426a-a89b-7b5c99dabb5c/resourceGroups/ProjetoEstagio/providers/Microsoft.Storage/storageAccounts/projetoestagio"
 		}
 	},
 	"variables": {
@@ -600,12 +596,12 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Schedule')]",
+			"name": "[concat(parameters('factoryName'), '/new-blob')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -613,66 +609,19 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"fileName": "[parameters('Schedule_properties_Copy Data To SQL_parameters_fileName')]",
-							"tableName": "[parameters('Schedule_properties_Copy Data To SQL_parameters_tableName')]"
+							"fileName": "[parameters('new-blob_properties_Copy Data To SQL_parameters_fileName')]",
+							"tableName": "[parameters('new-blob_properties_Copy Data To SQL_parameters_tableName')]"
 						}
 					}
 				],
-				"type": "ScheduleTrigger",
+				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Month",
-						"interval": 1,
-						"startTime": "2021-03-24T12:20:00Z",
-						"timeZone": "UTC",
-						"schedule": {
-							"minutes": [
-								30
-							],
-							"hours": [
-								1
-							],
-							"monthDays": [
-								9,
-								18,
-								11
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Copy Data To SQL')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/tumbling')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "Copy Data To SQL",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"fileName": "[parameters('tumbling_properties_pipeline_parameters_fileName')]",
-						"tableName": "[parameters('tumbling_properties_pipeline_parameters_tableName')]"
-					}
-				},
-				"type": "TumblingWindowTrigger",
-				"typeProperties": {
-					"frequency": "Minute",
-					"interval": 15,
-					"startTime": "2021-03-24T12:41:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 1,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
+					"blobPathBeginsWith": "/input/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('new-blob_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
 				}
 			},
 			"dependsOn": [

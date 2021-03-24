@@ -15,21 +15,17 @@
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'OutputSQL'"
 		},
-		"Schedule_properties_Copy Data To SQL_parameters_fileName": {
+		"new-blob_properties_Copy Data To SQL_parameters_fileName": {
 			"type": "string",
-			"defaultValue": "cars.csv"
+			"defaultValue": "@triggerBody().fileName"
 		},
-		"Schedule_properties_Copy Data To SQL_parameters_tableName": {
+		"new-blob_properties_Copy Data To SQL_parameters_tableName": {
 			"type": "string",
-			"defaultValue": "cars"
+			"defaultValue": "@triggerBody().tableName"
 		},
-		"tumbling_properties_pipeline_parameters_fileName": {
+		"new-blob_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "cars.csv"
-		},
-		"tumbling_properties_pipeline_parameters_tableName": {
-			"type": "string",
-			"defaultValue": "cars"
+			"defaultValue": "/subscriptions/f999f944-5fcc-426a-a89b-7b5c99dabb5c/resourceGroups/ProjetoEstagio/providers/Microsoft.Storage/storageAccounts/projetoestagio"
 		},
 		"containerUri": {
 			"type": "string",
@@ -64,17 +60,14 @@
 					"OutputSQL_connectionString": {
 						"value": "[parameters('OutputSQL_connectionString')]"
 					},
-					"Schedule_properties_Copy Data To SQL_parameters_fileName": {
-						"value": "[parameters('Schedule_properties_Copy Data To SQL_parameters_fileName')]"
+					"new-blob_properties_Copy Data To SQL_parameters_fileName": {
+						"value": "[parameters('new-blob_properties_Copy Data To SQL_parameters_fileName')]"
 					},
-					"Schedule_properties_Copy Data To SQL_parameters_tableName": {
-						"value": "[parameters('Schedule_properties_Copy Data To SQL_parameters_tableName')]"
+					"new-blob_properties_Copy Data To SQL_parameters_tableName": {
+						"value": "[parameters('new-blob_properties_Copy Data To SQL_parameters_tableName')]"
 					},
-					"tumbling_properties_pipeline_parameters_fileName": {
-						"value": "[parameters('tumbling_properties_pipeline_parameters_fileName')]"
-					},
-					"tumbling_properties_pipeline_parameters_tableName": {
-						"value": "[parameters('tumbling_properties_pipeline_parameters_tableName')]"
+					"new-blob_properties_typeProperties_scope": {
+						"value": "[parameters('new-blob_properties_typeProperties_scope')]"
 					}
 				}
 			},
