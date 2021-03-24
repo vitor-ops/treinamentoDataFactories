@@ -5,6 +5,9 @@
 			"referenceName": "OutputSQL",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Outros"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [

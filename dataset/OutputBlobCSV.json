@@ -1,44 +1,25 @@
 {
-	"name": "AddressesCSV",
+	"name": "OutputBlobCSV",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "InputBlop",
 			"type": "LinkedServiceReference"
 		},
 		"folder": {
-			"name": "Outros"
+			"name": "Data Flow && Transform Data"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "addresses.csv",
-				"container": "docs"
+				"container": "output"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
