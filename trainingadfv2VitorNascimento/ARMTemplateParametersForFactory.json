@@ -16,6 +16,12 @@
 		},
 		"Schedule_properties_Copy Data To SQL_parameters_tableName": {
 			"value": "cars"
+		},
+		"tumbling_properties_pipeline_parameters_fileName": {
+			"value": "cars.csv"
+		},
+		"tumbling_properties_pipeline_parameters_tableName": {
+			"value": "cars"
 		}
 	}
 }
