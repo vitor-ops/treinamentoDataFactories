@@ -11,6 +11,12 @@
 		"OutputSQL_connectionString": {
 			"value": ""
 		},
+		"Schedule_properties_Copy Data To SQL_parameters_fileName": {
+			"value": "cars.csv"
+		},
+		"Schedule_properties_Copy Data To SQL_parameters_tableName": {
+			"value": "cars"
+		},
 		"containerUri": {
 			"value": ""
 		},

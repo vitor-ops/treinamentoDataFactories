@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Cadeia de caracteres segura para 'connectionString' de 'OutputSQL'"
 		},
+		"Schedule_properties_Copy Data To SQL_parameters_fileName": {
+			"type": "string",
+			"defaultValue": "cars.csv"
+		},
+		"Schedule_properties_Copy Data To SQL_parameters_tableName": {
+			"type": "string",
+			"defaultValue": "cars"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI para a conta de armazenamento contendo os modelos do ARM vinculados"
@@ -47,6 +55,12 @@
 					},
 					"OutputSQL_connectionString": {
 						"value": "[parameters('OutputSQL_connectionString')]"
+					},
+					"Schedule_properties_Copy Data To SQL_parameters_fileName": {
+						"value": "[parameters('Schedule_properties_Copy Data To SQL_parameters_fileName')]"
+					},
+					"Schedule_properties_Copy Data To SQL_parameters_tableName": {
+						"value": "[parameters('Schedule_properties_Copy Data To SQL_parameters_tableName')]"
 					}
 				}
 			},
