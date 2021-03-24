@@ -1,0 +1,28 @@
+{
+	"name": "new-blob",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Copy Data To SQL",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"fileName": "@triggerBody().fileName",
+					"tableName": "@triggerBody().tableName"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/input/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/f999f944-5fcc-426a-a89b-7b5c99dabb5c/resourceGroups/ProjetoEstagio/providers/Microsoft.Storage/storageAccounts/projetoestagio",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
