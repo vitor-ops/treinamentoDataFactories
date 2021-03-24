@@ -19,14 +19,24 @@
 						"type": "DatasetReference"
 					},
 					"name": "MoviesClean"
+				},
+				{
+					"dataset": {
+						"referenceName": "OutputBlobCSV",
+						"type": "DatasetReference"
+					},
+					"name": "MoviesByYearSink"
 				}
 			],
 			"transformations": [
 				{
-					"name": "ColunaDerivada1"
+					"name": "YearExtraction"
+				},
+				{
+					"name": "MoviesByYear"
 				}
 			],
-			"script": "source(output(\n\t\tmovieId as short,\n\t\ttitle as string,\n\t\tgenres as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Movies\nMovies derive(Year = toInteger(trim(right(title, 6), '()')),\n\t\ttitle = toString(left(title, length(title) -6))) ~> ColunaDerivada1\nColunaDerivada1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['movies-clean.csv'],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> MoviesClean"
+			"script": "source(output(\n\t\tmovieId as short,\n\t\ttitle as string,\n\t\tgenres as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> Movies\nMovies derive(Year = toInteger(trim(right(title, 6), '()')),\n\t\ttitle = toString(left(title, length(title) -6))) ~> YearExtraction\nYearExtraction aggregate(groupBy(Year),\n\tMoviesCount = count()) ~> MoviesByYear\nYearExtraction sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['movies-clean.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> MoviesClean\nMoviesByYear sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpartitionFileNames:['movies-by-year.csv'],\n\tpartitionBy('hash', 1),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> MoviesByYearSink"
 		}
 	}
 }
