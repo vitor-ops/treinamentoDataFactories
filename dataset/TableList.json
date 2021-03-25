@@ -1,0 +1,15 @@
+{
+	"name": "TableList",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OutputSQL",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Lookup & ForEach"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
