@@ -116,6 +116,34 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "SendEmail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "For Each Table",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-16.brazilsouth.logic.azure.com:443/workflows/ab9ad183d8844199bed51fe495e08b70/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=4PW3iQ1U7HgBWHV_m0ZxolB6KxRgAFGnL8st9NVEgdQ",
+					"method": "POST",
+					"body": {
+						"value": "{\n    \"title\": \"PIPELINE RUN FINISHED\",\n    \"message\": \"LOOKUP AND FOREACH FINISHED  RUNNING SUCCESSFULLY! \",\n    \"color\": \"Green\",\n    \"dataFactoryName\": \"@{pipeline().DataFactory}\",\n    \"pipelineName\": \"@{pipeline().Pipeline}\",\n    \"pipelineRunId\": \"@{pipeline().RunId}\",\n    \"time\": \"@{utcnow()}\"\n}",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"annotations": []
